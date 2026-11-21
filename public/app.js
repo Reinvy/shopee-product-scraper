@@ -103,9 +103,16 @@ async function submit(event) {
 
   clearError();
   els.result.hidden = true;
+  els.loading.textContent = 'Mengambil data…';
   els.loading.hidden = false;
+  els.login.disabled = true;
   els.submit.disabled = true;
   els.input.disabled = true;
+  const slowTimer = setTimeout(() => {
+    if (!els.loading.hidden) {
+      els.loading.textContent = 'Masih memproses… jika jendela Chrome meminta verifikasi, selesaikan captcha di sana.';
+    }
+  }, 8000);
 
   try {
     const res = await fetch('/api/scrape', {
@@ -122,7 +129,10 @@ async function submit(event) {
   } catch {
     showError('UNKNOWN', 'Gagal menghubungi server.');
   } finally {
+    clearTimeout(slowTimer);
+    els.loading.textContent = 'Mengambil data…';
     els.loading.hidden = true;
+    els.login.disabled = false;
     els.submit.disabled = false;
     els.input.disabled = false;
     refreshSession();

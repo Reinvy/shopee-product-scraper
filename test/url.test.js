@@ -2,7 +2,7 @@
 
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const { parseProductUrl, normalizeInput } = require('../src/url');
+const { parseProductUrl, normalizeInput, isVerifyUrl } = require('../src/url');
 
 const FULL =
   'https://shopee.co.id/product/1516969716/41660748693?d_id=17c39&uls_trackid=5767d8im02g7&utm_content=PPEZDJ71VTZzsQ6NkgZVf2gMSu5';
@@ -39,4 +39,12 @@ test('normalizeInput canonicalizes a full product URL without network', async ()
     itemId: '41660748693',
     url: 'https://shopee.co.id/product/1516969716/41660748693',
   });
+});
+
+test('detects Shopee verification URLs', () => {
+  assert.equal(isVerifyUrl('https://shopee.co.id/verify/captcha?anti_bot_tracking_id=x'), true);
+  assert.equal(isVerifyUrl('https://shopee.co.id/verify/traffic?next=x'), true);
+  assert.equal(isVerifyUrl('https://shopee.co.id/product/1/2'), false);
+  assert.equal(isVerifyUrl('https://example.com/verify/captcha'), false);
+  assert.equal(isVerifyUrl('not a url'), false);
 });

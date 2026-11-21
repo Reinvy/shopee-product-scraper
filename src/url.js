@@ -11,6 +11,16 @@ function isShopeeHost(hostname) {
   return SHOPEE_HOST.test(hostname || '');
 }
 
+function isVerifyUrl(raw) {
+  try {
+    const u = new URL(raw);
+    return SHOPEE_HOST.test(u.hostname) &&
+      (u.pathname === '/verify' || u.pathname.startsWith('/verify/'));
+  } catch {
+    return false;
+  }
+}
+
 function isShortLink(raw) {
   try {
     return new URL(raw).hostname.endsWith('shp.ee');
@@ -113,6 +123,8 @@ async function normalizeInput(raw) {
 
 module.exports = {
   UA,
+  isShopeeHost,
+  isVerifyUrl,
   isShortLink,
   parseProductUrl,
   resolveShortLink,
