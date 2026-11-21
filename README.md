@@ -15,6 +15,11 @@ Anda login sekali secara manual. Scrape berjalan di jendela Chrome itu dan menan
 respons `get_pc` milik Shopee sendiri. Tidak ada login otomatis, tidak ada kredensial
 yang disimpan selain cookie di folder profil Chrome lokal.
 
+Drivernya **Patchright** — fork Playwright yang menghapus kebocoran `Runtime.enable` /
+`Console.enable` yang dipakai Shopee untuk mendeteksi browser otomatis — dan Chrome
+diluncurkan lewat `launchPersistentContext` dengan `channel: 'chrome'`, `viewport: null`,
+tanpa emulasi locale/timezone.
+
 ## Prasyarat
 
 - Node.js >= 20 (diuji di Node 24)
@@ -53,12 +58,12 @@ Buka <http://localhost:3001>.
 | Gejala | Solusi |
 | --- | --- |
 | `LOGIN_REQUIRED` / `BLOCKED` dengan error `90309999` | Selesaikan login/captcha di jendela Chrome, lalu scrape lagi. |
-| `NO_CHROME` | Set `CHROME_PATH=/path/ke/chrome`. |
-| Port 9222 sudah dipakai | Set `CDP_PORT=9333` (dan sesuaikan bila perlu). |
+| `NO_CHROME` | Set `CHROME_PATH=/path/ke/google-chrome` (Google Chrome, bukan Chromium). |
+| Captcha masih muncul setelah login | Hentikan app, backup profil aktif, mulai lagi dengan profil baru, login sekali. Kalau masih muncul, laporkan URL `/verify` yang dituju. |
 | Port 3001 sudah dipakai | Set `PORT=3002`. |
 | Ingin profil lain | Set `PROFILE_DIR=/path/ke/profil`. |
 
-Konfigurasi lewat environment variable: `PORT`, `CDP_PORT`, `CHROME_PATH`, `PROFILE_DIR`.
+Konfigurasi lewat environment variable: `PORT`, `CHROME_PATH`, `PROFILE_DIR`.
 
 ## Tes
 
@@ -73,7 +78,7 @@ maupun heuristik DOM.
 
 - `server.js` — HTTP server + API (`/api/session`, `/api/login`, `/api/scrape`).
 - `src/url.js` — normalisasi link pendek/penuh.
-- `src/chrome.js` — spawn/attach Chrome via CDP, profil `.shopee-profile`, cek cookie login.
+- `src/chrome.js` — launch Chrome via Patchright, profil persisten, cek cookie login.
 - `src/scrape.js` — antrean, navigasi, intersepsi `get_pc`, klasifikasi error.
 - `src/extract.js` — payload → produk; fallback DOM.
 - `public/` — UI vanilla HTML/CSS/JS.
