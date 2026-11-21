@@ -1,0 +1,54 @@
+:root {
+  --card: #fff; --text: #16181d; --muted: #6b7280; --border: #e4e7ec;
+  --accent: #ee4d2d; --green: #16a34a; --amber: #d97706; --red: #dc2626;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 40px 16px 64px; background: #f6f7f9; color: var(--text);
+  font: 15px/1.5 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+.wrap { max-width: 760px; margin: 0 auto; }
+h1 { margin: 0 0 4px; font-size: 24px; }
+h2 { margin: 16px 0 8px; font-size: 20px; }
+p { margin: 0; }
+.muted { color: var(--muted); }
+.card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 16px; margin-top: 16px;
+}
+.session { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.session-row { display: flex; align-items: center; gap: 8px; font-weight: 600; }
+.dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.dot.on { background: var(--green); }
+.dot.warn { background: var(--amber); }
+.dot.off { background: #9ca3af; }
+.hint { flex-basis: 100%; color: var(--muted); font-size: 13px; }
+label { display: block; margin-bottom: 8px; font-weight: 600; }
+.input-row { display: flex; gap: 8px; }
+input[type='text'] {
+  flex: 1; min-width: 0; padding: 10px 12px;
+  border: 1px solid var(--border); border-radius: 8px; font: inherit;
+}
+button {
+  padding: 10px 16px; border: 0; border-radius: 8px; background: var(--accent);
+  color: #fff; font: inherit; font-weight: 600; cursor: pointer;
+}
+button:disabled { opacity: 0.6; cursor: default; }
+button.secondary { background: #fff; color: var(--text); border: 1px solid var(--border); }
+button.attention { animation: pulse 1.2s ease-in-out 3; }
+@keyframes pulse { 50% { opacity: 0.55; } }
+.loading { color: var(--muted); margin-top: 16px; }
+.error { border-color: var(--red); }
+.error strong { color: var(--red); }
+.error p { margin-top: 6px; }
+.main-image {
+  width: 100%; height: 220px; object-fit: cover;
+  border-radius: 8px; background: #f0f1f3;
+}
+.thumbs { display: flex; gap: 8px; margin-top: 8px; }
+.thumbs img {
+  width: 56px; height: 56px; object-fit: cover;
+  border-radius: 6px; border: 1px solid var(--border); cursor: pointer;
+}
+.price { font-size: 22px; font-weight: 700; }
+a { color: var(--accent); }

@@ -1,0 +1,25 @@
+{
+  "error": 0,
+  "data": {
+    "item": {
+      "item_id": 41660748693,
+      "shop_id": 1516969716,
+      "title": "Iphone IP 15 128 BNIB Garansi Resmi Indo",
+      "currency": "IDR",
+      "price": 7470000000,
+      "price_min": 7470000000,
+      "price_max": 7470000000,
+      "price_before_discount": 8000000000,
+      "image": "id-11134207-7r98o-abc123",
+      "images": [
+        "id-11134207-7r98o-abc123",
+        "id-11134207-7r98o-def456"
+      ],
+      "catid": 11042724,
+      "categories": [
+        { "catid": 11042720, "display_name": "Elektronik" },
+        { "catid": 11042724, "display_name": "Handphone & Tablet" }
+      ]
+    }
+  }
+}

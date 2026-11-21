@@ -1,0 +1,4 @@
+node_modules/
+.shopee-profile/
+npm-debug.log*
+.env

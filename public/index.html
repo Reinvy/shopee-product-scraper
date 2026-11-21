@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Shopee Scraper Prototype</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <main class="wrap">
+      <header>
+        <h1>Shopee Scraper Prototype</h1>
+        <p class="muted">Tempel link produk, ambil nama, foto, harga, dan kategori.</p>
+      </header>
+
+      <section class="card session">
+        <div class="session-row">
+          <span id="statusDot" class="dot off"></span>
+          <span id="statusText">Memeriksa sesi…</span>
+        </div>
+        <button id="loginBtn" type="button" class="secondary">Login Shopee</button>
+        <p class="hint">
+          Jendela Chrome akan terbuka. Masuk ke Shopee di jendela itu (sekali saja; sesi tersimpan di
+          <code>.shopee-profile</code>).
+        </p>
+      </section>
+
+      <form id="scrapeForm" class="card">
+        <label for="urlInput">Link produk Shopee</label>
+        <div class="input-row">
+          <input
+            id="urlInput"
+            name="url"
+            type="text"
+            autocomplete="off"
+            placeholder="Tempel link Shopee, mis. https://id.shp.ee/vJuQTM98"
+            required
+          />
+          <button id="submitBtn" type="submit">Ambil Data</button>
+        </div>
+      </form>
+
+      <p id="loading" class="loading" hidden>Mengambil data…</p>
+
+      <section id="errorBox" class="card error" hidden>
+        <strong id="errorCode"></strong>
+        <p id="errorMessage"></p>
+      </section>
+
+      <section id="result" class="card" hidden>
+        <img id="mainImage" class="main-image" alt="" />
+        <div id="thumbs" class="thumbs"></div>
+        <h2 id="productName"></h2>
+        <p id="productPrice" class="price"></p>
+        <p id="productCategory" class="muted category"></p>
+        <a id="productLink" href="#" target="_blank" rel="noopener">Buka di Shopee</a>
+      </section>
+    </main>
+    <script src="/app.js" defer></script>
+  </body>
+</html>
